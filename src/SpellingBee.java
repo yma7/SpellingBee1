@@ -25,6 +25,8 @@ public class SpellingBee {
 
     private String letters;
     private ArrayList<String> words;
+    public static final int DICTIONARY_SIZE = 143091;
+    private static final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
     public SpellingBee(String letters) {
         this.letters = letters;
@@ -40,6 +42,18 @@ public class SpellingBee {
     // TODO: Apply mergesort to sort all words.
     private void sort() {
         // YOUR CODE HERE
+    }
+
+    // Removes duplicates from the sorted list.
+    private void removeDuplicates() {
+        int i = 0;
+        while (i < words.size() - 1) {
+            String word = words.get(i);
+            if (word.equals(words.get(i + 1)))
+                words.remove(i + 1);
+            else
+                i++;
+        }
     }
 
     // TODO: For each word in words, use binary search to see if it is in the dictionary.
@@ -78,15 +92,30 @@ public class SpellingBee {
         }
         while (!letters.matches("[a-zA-Z]+"));
 
+        // Load the dictionary
+        File dictionaryFile = new File("Resources/dictionary.txt");
+        try {
+            s = new Scanner(dictionaryFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not open dictionary file.");
+            return;
+        }
+        int i = 0;
+        while(s.hasNextLine()) {
+            DICTIONARY[i++] = s.nextLine();
+        }
+
+
         // Generate and print all valid words from those letters.
         SpellingBee sb = new SpellingBee(letters);
         sb.generate();
         sb.sort();
+        sb.removeDuplicates();
         sb.checkWords();
         try {
             sb.printWords();
         } catch (IOException e) {
-            System.out.println("Could not write to output file.");;
+            System.out.println("Could not write to output file.");
         }
         s.close();
     }
