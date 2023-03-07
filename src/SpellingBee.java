@@ -33,7 +33,7 @@ public class SpellingBee {
     private String letters;
     private ArrayList<String> words;
     public static final int DICTIONARY_SIZE = 143091;
-    private static final String[] DICTIONARY = new String[DICTIONARY_SIZE];
+    public static final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
     public SpellingBee(String letters) {
         this.letters = letters;
@@ -94,6 +94,21 @@ public class SpellingBee {
         return this;
     }
 
+    public static void loadDictionary() {
+        Scanner s;
+        File dictionaryFile = new File("Resources/dictionary.txt");
+        try {
+            s = new Scanner(dictionaryFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not open dictionary file.");
+            return;
+        }
+        int i = 0;
+        while(s.hasNextLine()) {
+            DICTIONARY[i++] = s.nextLine();
+        }
+    }
+
     public static void main(String[] args) {
 
         // Prompt for letters until given only letters.
@@ -106,17 +121,7 @@ public class SpellingBee {
         while (!letters.matches("[a-zA-Z]+"));
 
         // Load the dictionary
-        File dictionaryFile = new File("Resources/dictionary.txt");
-        try {
-            s = new Scanner(dictionaryFile);
-        } catch (FileNotFoundException e) {
-            System.out.println("Could not open dictionary file.");
-            return;
-        }
-        int i = 0;
-        while(s.hasNextLine()) {
-            DICTIONARY[i++] = s.nextLine();
-        }
+        SpellingBee.loadDictionary();
 
         // Generate and print all valid words from those letters.
         SpellingBee sb = new SpellingBee(letters);
