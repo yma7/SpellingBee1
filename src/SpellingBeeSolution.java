@@ -8,11 +8,16 @@ import java.util.Scanner;
  * This program accepts an input of letters. It prints to an output file
  * all English words that can be generated from those letters.
  *
- * For example: if the user inputs the letters "act" the program will generate:
- * a
- * at
- * act
- * cat
+ * For example: if the user inputs the letters "doggo" the program will generate:
+ * do
+ * dog
+ * doggo
+ * go
+ * god
+ * gog
+ * gogo
+ * goo
+ * good
  *
  * It utilizes recursion to generate the strings, mergesort to sort them, and
  * binary search to find them in a dictionary.
@@ -20,32 +25,36 @@ import java.util.Scanner;
  * @author Zach Blick, [ADD YOUR NAME HERE]
  *
  * Written on March 5, 2023 for CS2 @ Menlo School
+ *
+ * DO NOT MODIFY MAIN OR ANY OF THE METHOD HEADERS.
  */
-public class SpellingBee {
+public class SpellingBeeSolution {
 
     private String letters;
     private ArrayList<String> words;
     public static final int DICTIONARY_SIZE = 143091;
     private static final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
-    public SpellingBee(String letters) {
+    public SpellingBeeSolution(String letters) {
         this.letters = letters;
         words = new ArrayList<String>();
     }
 
-    // TODO: recursively generate all possible substrings and permutations of the letters.
-    //  Store them all in the ArrayList words.
-    private void generate() {
-        // YOUR CODE HERE
+    // TODO: generate all possible substrings and permutations of the letters.
+    //  Store them all in the ArrayList words. Do this by calling ANOTHER method
+    //  that will find the substrings recursively.
+    public void generate() {
+        // YOUR CODE HERE — Call your recursive method!
     }
 
-    // TODO: Apply mergesort to sort all words.
-    private void sort() {
+    // TODO: Apply mergesort to sort all words. Do this by calling ANOTHER method
+    //  that will find the substrings recursively.
+    public void sort() {
         // YOUR CODE HERE
     }
 
     // Removes duplicates from the sorted list.
-    private void removeDuplicates() {
+    public void removeDuplicates() {
         int i = 0;
         while (i < words.size() - 1) {
             String word = words.get(i);
@@ -58,12 +67,12 @@ public class SpellingBee {
 
     // TODO: For each word in words, use binary search to see if it is in the dictionary.
     //  If it is not in the dictionary, remove it from words.
-    private void checkWords() {
+    public void checkWords() {
         // YOUR CODE HERE
     }
 
     // Prints all valid words to wordList.txt
-    private void printWords() throws IOException {
+    public void printWords() throws IOException {
         File wordFile = new File("Resources/wordList.txt");
         BufferedWriter writer = new BufferedWriter(new FileWriter(wordFile, false));
         for (String word : words) {
@@ -77,7 +86,11 @@ public class SpellingBee {
         return words;
     }
 
-    public SpellingBee getBee() {
+    public void setWords(ArrayList<String> words) {
+        this.words = words;
+    }
+
+    public SpellingBeeSolution getBee() {
         return this;
     }
 
@@ -105,9 +118,8 @@ public class SpellingBee {
             DICTIONARY[i++] = s.nextLine();
         }
 
-
         // Generate and print all valid words from those letters.
-        SpellingBee sb = new SpellingBee(letters);
+        SpellingBeeSolution sb = new SpellingBeeSolution(letters);
         sb.generate();
         sb.sort();
         sb.removeDuplicates();
