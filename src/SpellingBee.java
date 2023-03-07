@@ -28,14 +28,14 @@ import java.util.Scanner;
  *
  * DO NOT MODIFY MAIN OR ANY OF THE METHOD HEADERS.
  */
-public class SpellingBeeSolution {
+public class SpellingBee {
 
     private String letters;
     private ArrayList<String> words;
     public static final int DICTIONARY_SIZE = 143091;
     private static final String[] DICTIONARY = new String[DICTIONARY_SIZE];
 
-    public SpellingBeeSolution(String letters) {
+    public SpellingBee(String letters) {
         this.letters = letters;
         words = new ArrayList<String>();
     }
@@ -90,7 +90,7 @@ public class SpellingBeeSolution {
         this.words = words;
     }
 
-    public SpellingBeeSolution getBee() {
+    public SpellingBee getBee() {
         return this;
     }
 
@@ -119,7 +119,7 @@ public class SpellingBeeSolution {
         }
 
         // Generate and print all valid words from those letters.
-        SpellingBeeSolution sb = new SpellingBeeSolution(letters);
+        SpellingBee sb = new SpellingBee(letters);
         sb.generate();
         sb.sort();
         sb.removeDuplicates();
